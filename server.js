@@ -29,13 +29,28 @@ app.post('/guide', async (req, res) => {
     const guide = await generateGuide(goal, siteData);
     // ensure response is an object with `steps` so client can normalize consistently
     if (typeof guide === 'string') {
-      return res.json({ steps: guide });
+      const lines = guide
+        .split(/\r?\n/)
+        .map(l => l.replace(/^\s*\d+[\.)]\s*/,'').replace(/^[\-•\*]\s*/,'').trim())
+        .filter(Boolean)
+        .map(t => ({ text: t }));
+      return res.json({ steps: lines });
     }
+
     if (guide && Array.isArray(guide.steps)) {
-      return res.json(guide);
+      const steps = guide.steps.map(s => {
+        if (!s) return null;
+        if (typeof s === 'string') return { text: s };
+        if (typeof s === 'object' && s.text) return { text: String(s.text) };
+        return { text: String(s) };
+      }).filter(Boolean);
+      return res.json({ steps });
     }
-    // fallback: wrap whatever was returned
-    return res.json({ steps: guide });
+
+    // fallback: if guide is an object/string-like, try to stringify and split
+    const fallback = typeof guide === 'object' ? JSON.stringify(guide) : String(guide || '');
+    const lines = fallback.split(/\r?\n/).map(l=>l.trim()).filter(Boolean).map(t=>({text:t}));
+    return res.json({ steps: lines });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
