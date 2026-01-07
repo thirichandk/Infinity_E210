@@ -10,8 +10,8 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>🤖 AI Intent Guide Agent</h1>
-      <div class="notice">Quick, helpful guidance powered by a local model</div>
+      <h1 id="appTitle">🤖 AI Intent Guide Agent</h1>
+      <div id="subtitle" class="notice">Quick, helpful guidance powered by a local model</div>
     </div>
 
     <div class="controls">
@@ -22,15 +22,15 @@
     </div>
 
     <div class="quick">
-      <button class="quick-btn" data-wish="Buy a new phone">Buy a new phone</button>
-      <button class="quick-btn" data-wish="Book a train ticket from NYC to DC">Book train ticket</button>
-      <button class="quick-btn" data-wish="Find affordable hotels in Paris">Find hotels</button>
+      <button id="quick1" class="quick-btn" data-wish="Buy a new phone">Buy a new phone</button>
+      <button id="quick2" class="quick-btn" data-wish="Book a train ticket from NYC to DC">Book train ticket</button>
+      <button id="quick3" class="quick-btn" data-wish="Find affordable hotels in Paris">Find hotels</button>
     </div>
 
     <div id="output" class="output"></div>
 
     <div class="history">
-      <h4>Recent queries</h4>
+      <h4 id="historyHeader">Recent queries</h4>
       <div id="history"></div>
     </div>
     <div id="guidePanel"></div>

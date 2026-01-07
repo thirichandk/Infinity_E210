@@ -27,7 +27,15 @@ app.post('/guide', async (req, res) => {
     const goal = { wish };
     const siteData = option || {};
     const guide = await generateGuide(goal, siteData);
-    res.json(guide);
+    // ensure response is an object with `steps` so client can normalize consistently
+    if (typeof guide === 'string') {
+      return res.json({ steps: guide });
+    }
+    if (guide && Array.isArray(guide.steps)) {
+      return res.json(guide);
+    }
+    // fallback: wrap whatever was returned
+    return res.json({ steps: guide });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
