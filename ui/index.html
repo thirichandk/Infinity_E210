@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Intent Guide Agent</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <style>/* minimal fallback */body,html{height:100%}</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🤖 AI Intent Guide Agent</h1>
+      <div class="notice">Quick, helpful guidance powered by a local model</div>
+    </div>
+
+    <div class="controls">
+      <div class="input">
+        <input id="wish" placeholder="Enter your wish (e.g., Buy a mobile, Book train ticket)" />
+        <button id="resolveBtn" class="btn">Find Options</button>
+      </div>
+    </div>
+
+    <div class="quick">
+      <button class="quick-btn" data-wish="Buy a new phone">Buy a new phone</button>
+      <button class="quick-btn" data-wish="Book a train ticket from NYC to DC">Book train ticket</button>
+      <button class="quick-btn" data-wish="Find affordable hotels in Paris">Find hotels</button>
+    </div>
+
+    <div id="output" class="output"></div>
+
+    <div class="history">
+      <h4>Recent queries</h4>
+      <div id="history"></div>
+    </div>
+    <div id="guidePanel"></div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
